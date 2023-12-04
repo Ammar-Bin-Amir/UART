@@ -16,9 +16,9 @@ VVP_RX = $(shell pwd)/temp/UART_Rx_tb.vvp
 VCD_RX = $(shell pwd)/temp/UART_Rx_tb.vcd
 
 SRC_UART = $(shell pwd)/src/UART.v
-TB_UART = $(shell pwd)/tb/UART_Test_tb.v
-VVP_UART = $(shell pwd)/temp/UART_Test_tb.vvp
-VCD_UART = $(shell pwd)/temp/UART_Test_tb.vcd
+TB_UART = $(shell pwd)/tb/UART_tb.v
+VVP_UART = $(shell pwd)/temp/UART_tb.vvp
+VCD_UART = $(shell pwd)/temp/UART_tb.vcd
 
 # Compilation Settings
 
@@ -58,7 +58,7 @@ tx: compile_tx
 
 compile_tx: 
 	mkdir -p temp
-	$(COMPILER) $(COMPILER_FLAG) $(VVP_TX) $(TB_TX) $(SRC_TX)
+	$(COMPILER) $(COMPILER_FLAG) $(VVP_TX) $(TB_TX) $(SRC_TX) $(SRC_BAUD_RATE)
 
 clean_tx: 
 	rm -rf $(VCD_TX)
@@ -71,7 +71,7 @@ rx: compile_rx
 
 compile_rx: 
 	mkdir -p temp
-	$(COMPILER) $(COMPILER_FLAG) $(VVP_RX) $(TB_RX) $(SRC_RX)
+	$(COMPILER) $(COMPILER_FLAG) $(VVP_RX) $(TB_RX) $(SRC_RX) $(SRC_TX) $(SRC_BAUD_RATE)
 
 clean_rx: 
 	rm -rf $(VCD_RX)
